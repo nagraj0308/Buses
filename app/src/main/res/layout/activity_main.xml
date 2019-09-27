@@ -2,7 +2,46 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:padding="3dp"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
+
+    <fragment android:layout_height="190dp"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/filtersort"
+        android:layout_marginLeft="180dp"
+        android:id="@+id/sortingFragment"
+        android:name="com.nagraj.buses.SortFragment"/>
+
+    <LinearLayout android:layout_width="match_parent"
+        android:id="@+id/filtersort"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="3dp">
+    <Button android:id="@+id/gotoFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Filter"
+        android:textSize="24dp"
+        android:fontFamily="@font/fontone"
+        android:layout_marginRight="2dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/buttonlight"
+        />
+    <Button android:id="@+id/sortButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="2dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/fontone"
+        android:text="Sort"
+        android:textSize="24dp"
+        android:background="@drawable/buttonlight"
+        />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/linearlayout"
+    tools:context=".SortFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/tv"
+                android:gravity="center"
+                android:text="Sort"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/fare"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Fare"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/fareImg"
+                android:layout_width="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/no" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/departureTime"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Dept. Time"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/depTimeImg"
+                android:layout_width="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/no" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/seatsUnbooked"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Seat Avail"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/seatsUnbookedImg"
+                android:layout_width="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/no" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>
