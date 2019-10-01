@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".FilterActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/ll1"
@@ -31,7 +29,7 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/nonac"
+                android:id="@+id/nonAc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -182,7 +180,7 @@
             android:layout_width="match_parent"
             android:id="@+id/recyclerView"
             android:scrollbars="vertical"
-            android:layout_height="235dp" />
+            android:layout_height="290dp" />
     </LinearLayout>
 
 
@@ -201,9 +199,9 @@
             android:layout_weight="1"
             android:background="@drawable/button"
             android:fontFamily="@font/fontone"
-            android:text="Done"
+            android:text="Apply Filter"
             android:textColor="@color/white"
-            android:textSize="24dp" />
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/clearFilter"
@@ -213,9 +211,9 @@
             android:layout_weight="1"
             android:background="@drawable/buttonlight"
             android:fontFamily="@font/fontone"
-            android:text="Clear"
+            android:text="Clear All"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="24dp" />
+            android:textSize="20dp" />
     </LinearLayout>
 
 </RelativeLayout>
