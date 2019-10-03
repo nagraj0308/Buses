@@ -4,4 +4,6 @@
     <dimen name="fabw" >60dp</dimen>
     <dimen name="height_button" >40dp</dimen>
     <dimen name="button_text_size" >16sp</dimen>
+    <dimen name="text_size_15sp" >15sp</dimen>
+    <dimen name="text_size_12sp" >12sp</dimen>
 </resources>

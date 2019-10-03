@@ -6,22 +6,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> {
-    JSONArray contactList;
+    Route[] contactList;
 
     public RecyclerAdapter(List<Route> route) {
         try {
-
-            String json = new Gson().toJson(route);
-            this.contactList = new JSONArray(json);
+            contactList = route.toArray(new Route[route.size()]);
         } catch (Exception e) {
         }
     }
@@ -37,9 +29,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> {
     @Override
     public void onBindViewHolder(VH holder, int position) {
         try {
-            JSONObject c = contactList.getJSONObject(position);
 
-            holder.operatorName.setText(c.getString("operator"));
+            Route   route = contactList[position];
+            holder.fare.setText("\u20B9"+String.valueOf(route.getFare()));
+            holder.operatorName.setText(route.getOperator());
+            holder.seats.setText(String.valueOf(route.getSeatsAvailable())+" Seats");
+            holder.departureTime.setText(route.getTripStartTime());
+            holder.arrivalTime.setText(route.getTripEndTime());
+            String ac,volvo,sleeper;
+            ac= route.isIsAc()?"AC":"Non-AC";
+            volvo=route.isIsVolvo()?"Volvo":"Non-Volvo";
+            sleeper=route.isIsSleeper()?"Full-Sleeper":"Semi-Sleeper";
+            holder.luxuryType.setText(ac+", "+volvo+", "+sleeper);
+
 
 
         } catch (Exception e) {
@@ -50,7 +52,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> {
 
     @Override
     public int getItemCount() {
-        return contactList.length();
+        return contactList.length;
     }
 
     public class VH extends RecyclerView.ViewHolder {

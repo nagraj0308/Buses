@@ -77,8 +77,9 @@ public class Route {
         this.isAc = isAc;
     }
 
-    public String getTripStartTime() {
-        return tripStartTime;
+    public String getTripStartTime()
+    {
+        return tripStartTime.substring(12,20);
     }
 
     public void setTripStartTime(String tripStartTime) {
