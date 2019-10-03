@@ -48,11 +48,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_alignBottom="@+id/ll1"
+        android:layout_marginTop="40dp"
         android:id="@+id/recyclerView"
         android:background="#ffffff"
         android:scrollbars="vertical"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        />
 
 
 

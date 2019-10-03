@@ -3,6 +3,8 @@ package com.nagraj.buses;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -13,9 +15,15 @@ import android.widget.Button;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity implements Filter.ButtonSheetlistener {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements Filter.ButtonSheetlistener,InterfaceClass.ForView {
     Button  fare,departureTime,seats;
     FloatingActionButton gotoFilter;
+    List<Route> routes;
+    Presenter presenter;
+    RecyclerView recyclerView;
+    String recyclerString=null;
 
     int isIncFare=2,isIncSeat=2,isIncDepTime=2;
 
@@ -29,9 +37,11 @@ public class MainActivity extends AppCompatActivity implements Filter.ButtonShee
         fare=findViewById(R.id.fare);
         departureTime=findViewById(R.id.deptTime);
         seats=findViewById(R.id.seats);
+        recyclerView=findViewById(R.id.recyclerView);
 
         sortingSection();
         filterSection();
+        initialLoad();
 
     }
     public void sortingSection(){
@@ -149,4 +159,23 @@ public class MainActivity extends AppCompatActivity implements Filter.ButtonShee
     public void onButtonClick(String string){
         //.setText(string);
     }
+
+    public void callRecycler(List<Route> routeList){
+        LinearLayoutManager llm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(llm);
+        recyclerView.setAdapter(new RecyclerAdapter(routeList));
+
+    }
+
+    public void initialLoad(){
+        presenter=new Presenter(this);
+        presenter.getRoutesData();
+
+    }
+    @Override
+    public void getObject(List<Route> route){
+        routes=route;
+        callRecycler(routes);
+    }
+
 }
