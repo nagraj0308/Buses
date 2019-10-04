@@ -1,6 +1,8 @@
 
 package com.nagraj.buses;
 
+import androidx.versionedparcelable.ParcelField;
+
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -10,6 +12,7 @@ public class RoutesDetail {
     @SerializedName("routes")
     @Expose
     private List<Route> routes = null;
+
     @SerializedName("search_query")
     @Expose
     private SearchQuery searchQuery;

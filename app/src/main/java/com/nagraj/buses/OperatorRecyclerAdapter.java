@@ -1,20 +1,24 @@
 package com.nagraj.buses;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
+import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+public class OperatorRecyclerAdapter extends RecyclerView.Adapter<OperatorRecyclerAdapter.VH>  {
+    String[] operator;
 
-public class OperatorRecyclerAdapter extends RecyclerView.Adapter<OperatorRecyclerAdapter.VH> {
-    Route[] contactList;
 
-    public OperatorRecyclerAdapter(List<Route> route) {
+    public OperatorRecyclerAdapter(String[] operators) {
+
         try {
-            contactList = route.toArray(new Route[route.size()]);
+            operator=operators;
+
         } catch (Exception e) {
         }
     }
@@ -28,11 +32,10 @@ public class OperatorRecyclerAdapter extends RecyclerView.Adapter<OperatorRecycl
 
 
     @Override
-    public void onBindViewHolder(VH holder, int position) {
+    public void onBindViewHolder(final VH holder, final int position) {
         try {
+            holder.operatorName.setText(operator[position]);
 
-            Route route = contactList[position];
-            holder.operatorName.setText(route.getOperator());
 
 
         } catch (Exception e) {
@@ -41,20 +44,29 @@ public class OperatorRecyclerAdapter extends RecyclerView.Adapter<OperatorRecycl
     }
 
 
+
     @Override
     public int getItemCount() {
-        return contactList.length;
+        return operator.length;
     }
 
-    public class VH extends RecyclerView.ViewHolder {
-        public CheckBox operatorName;
+    public class VH extends RecyclerView.ViewHolder  {
+        public AppCompatCheckBox operatorName;
 
         public VH(View itemView) {
             super(itemView);
             this.operatorName = itemView.findViewById(R.id.operatorName);
+            operatorName.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    Filter.isOperatorChecked[getAdapterPosition()]=b;
+                }
+            });
 
         }
     }
+
+
 }
 
 

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -147,8 +148,9 @@ public class MainActivity extends AppCompatActivity implements Filter.ButtonShee
       gotoFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Filter bottomSheetDialogDemo=new Filter();
-                bottomSheetDialogDemo.show(getSupportFragmentManager(),"exampleBottomsheet");
+                Filter filter = Filter.newInstance(routes, true);
+                //filter.setTargetFragment(,300);
+                filter.show(getSupportFragmentManager(),"exampleBottomsheet");
 
             }
         });

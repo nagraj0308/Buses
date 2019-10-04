@@ -3,42 +3,68 @@ package com.nagraj.buses;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Filter extends BottomSheetDialogFragment {
     ButtonSheetlistener buttonSheetlistener;
-    Button doneFilter,clearFilter;
-    CheckBox ac,nonAc,volvo,nonVolvo,sleeper,semiSleeper;
+    Button doneFilter, clearFilter;
+    CheckBox ac, nonAc, volvo, nonVolvo, sleeper, semiSleeper;
     RecyclerView recyclerViewOperator;
-    List<Route> routes;
+    ArrayList<Route> routeArrayList = new ArrayList<>();
+    public static boolean[] isOperatorChecked;
+
+    Route[] routeList;
+    Set<String> set = new HashSet<>();
+    String[] operator;
+
+
+    public static Filter newInstance(List<Route> routes, boolean isFrom) {
+        Filter fragment = new Filter();
+        Bundle argument = new Bundle();
+        argument.putBoolean("isFrom", isFrom);
+        fragment.setArguments(argument);
+        return fragment;
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view1=inflater.inflate(R.layout.activity_filter,container,false);
+        View view1 = inflater.inflate(R.layout.activity_filter, container, false);
 
-        doneFilter=view1.findViewById(R.id.doneFilter);
-        clearFilter=view1.findViewById(R.id.clearFilter);
-        ac=view1.findViewById(R.id.ac);
-        nonAc=view1.findViewById(R.id.nonAc);
-        volvo=view1.findViewById(R.id.volvo);
-        nonVolvo=view1.findViewById(R.id.nonVolvo);
-        sleeper=view1.findViewById(R.id.sleeper);
-        semiSleeper=view1.findViewById(R.id.semiSleeper);
-        recyclerViewOperator=view1.findViewById(R.id.recyclerViewOperator);
+        routeArrayList =(ArrayList<Route>) ((MainActivity)getActivity()).getRoutes();
+        routeList = routeArrayList.toArray(new Route[routeArrayList.size()]);
+        setOperators();
+        operator=new String[set.size()];
+        System.arraycopy(set.toArray(), 0, operator, 0, set.size());
+        Arrays.sort(operator);
+        isOperatorChecked=new boolean[set.size()];
+
+
+        doneFilter = view1.findViewById(R.id.doneFilter);
+        clearFilter = view1.findViewById(R.id.clearFilter);
+        ac = view1.findViewById(R.id.ac);
+        nonAc = view1.findViewById(R.id.nonAc);
+        volvo = view1.findViewById(R.id.volvo);
+        nonVolvo = view1.findViewById(R.id.nonVolvo);
+        sleeper = view1.findViewById(R.id.sleeper);
+        semiSleeper = view1.findViewById(R.id.semiSleeper);
+        recyclerViewOperator = view1.findViewById(R.id.recyclerViewOperator);
 
 
         doneFilterSection();
@@ -52,7 +78,8 @@ public class Filter extends BottomSheetDialogFragment {
         return super.onCreateDialog(savedInstanceState);
     }
 
-    public void clearFilterSection(){
+
+    public void clearFilterSection() {
         clearFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,6 +89,11 @@ public class Filter extends BottomSheetDialogFragment {
                 nonVolvo.setChecked(false);
                 sleeper.setChecked(false);
                 semiSleeper.setChecked(false);
+                recyclerViewOperator.setAdapter(new OperatorRecyclerAdapter(operator));
+                for (int i=0;i<isOperatorChecked.length;i++) {
+                    isOperatorChecked[i]=false;
+
+                }
             }
         });
 
@@ -69,18 +101,18 @@ public class Filter extends BottomSheetDialogFragment {
     }
 
 
-
-    public void doneFilterSection(){
+    public void doneFilterSection() {
         doneFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 buttonSheetlistener.onButtonClick("Button clicked");
+                onDismiss();
                 dismiss();
             }
         });
     }
 
-    public interface ButtonSheetlistener{
+    public interface ButtonSheetlistener {
         void onButtonClick(String string);
     }
 
@@ -89,18 +121,36 @@ public class Filter extends BottomSheetDialogFragment {
         super.onAttach(context);
         try {
             buttonSheetlistener = (ButtonSheetlistener) context;
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
     }
-    public void recyclerViewOperatorSection(){
+
+    public void recyclerViewOperatorSection() {
         try {
             LinearLayoutManager llm = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
             recyclerViewOperator.setLayoutManager(llm);
-            // recyclerViewOperator.setAdapter(new OperatorRecyclerAdapter(routes));
-        }catch (Exception e){
+            recyclerViewOperator.setAdapter(new OperatorRecyclerAdapter(operator));
+        } catch (Exception e) {
 
         }
+    }
+
+    public void setOperators(){
+        for(Route contact :routeList){
+            set.add(contact.getOperator());
+        }
+    }
+    public void onDismiss(){
+
+        Log.e("TAG",(ac.isChecked())+String.valueOf(volvo.isChecked()));
+        for (int i=0;i<isOperatorChecked.length;i++) {
+
+            Log.e("TAG1","p "+i+(" "+isOperatorChecked[i]));
+
+
+        }
+
     }
 }
