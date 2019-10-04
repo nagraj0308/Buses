@@ -1,5 +1,6 @@
 package com.nagraj.buses;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,12 +11,19 @@ import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.util.List;
 
 public class Filter extends BottomSheetDialogFragment {
     ButtonSheetlistener buttonSheetlistener;
     Button doneFilter,clearFilter;
     CheckBox ac,nonAc,volvo,nonVolvo,sleeper,semiSleeper;
+    RecyclerView recyclerViewOperator;
+    List<Route> routes;
 
     @Nullable
     @Override
@@ -30,11 +38,18 @@ public class Filter extends BottomSheetDialogFragment {
         nonVolvo=view1.findViewById(R.id.nonVolvo);
         sleeper=view1.findViewById(R.id.sleeper);
         semiSleeper=view1.findViewById(R.id.semiSleeper);
+        recyclerViewOperator=view1.findViewById(R.id.recyclerViewOperator);
 
 
         doneFilterSection();
         clearFilterSection();
+        recyclerViewOperatorSection();
         return view1;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        return super.onCreateDialog(savedInstanceState);
     }
 
     public void clearFilterSection(){
@@ -52,6 +67,7 @@ public class Filter extends BottomSheetDialogFragment {
 
 
     }
+
 
 
     public void doneFilterSection(){
@@ -77,5 +93,14 @@ public class Filter extends BottomSheetDialogFragment {
 
         }
 
+    }
+    public void recyclerViewOperatorSection(){
+        try {
+            LinearLayoutManager llm = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            recyclerViewOperator.setLayoutManager(llm);
+            // recyclerViewOperator.setAdapter(new OperatorRecyclerAdapter(routes));
+        }catch (Exception e){
+
+        }
     }
 }

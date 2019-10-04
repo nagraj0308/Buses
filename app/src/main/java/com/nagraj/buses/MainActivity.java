@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements Filter.ButtonShee
     List<Route> routes;
     Presenter presenter;
     RecyclerView recyclerView;
-    String recyclerString=null;
 
     int isIncFare=2,isIncSeat=2,isIncDepTime=2;
 
@@ -150,10 +149,14 @@ public class MainActivity extends AppCompatActivity implements Filter.ButtonShee
             public void onClick(View view) {
                 Filter bottomSheetDialogDemo=new Filter();
                 bottomSheetDialogDemo.show(getSupportFragmentManager(),"exampleBottomsheet");
+
             }
         });
     }
 
+    public List<Route> getRoutes(){
+        return routes;
+    }
 
     @Override
     public void onButtonClick(String string){
@@ -164,6 +167,8 @@ public class MainActivity extends AppCompatActivity implements Filter.ButtonShee
         LinearLayoutManager llm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(new RecyclerAdapter(routeList));
+
+
 
     }
 

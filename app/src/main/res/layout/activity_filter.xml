@@ -178,7 +178,7 @@
             android:textSize="24sp" />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerViewOperator"
             android:scrollbars="vertical"
             android:layout_height="290dp" />
     </LinearLayout>
