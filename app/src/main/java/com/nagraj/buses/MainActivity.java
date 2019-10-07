@@ -10,21 +10,31 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements Filter.ButtonSheetlistener,InterfaceClass.ForView {
     Button  fare,departureTime,seats;
     FloatingActionButton gotoFilter;
-    List<Route> routes;
+    List<Route> routes,filteredRouteList;
+    List<String> checkedOperatorList;
     Presenter presenter;
     RecyclerView recyclerView;
 
+
+    boolean[] isOperatorChecked;
+    boolean[] filterValues={true,true,true,true,true,true};
+    String[] operators;
     int isIncFare=2,isIncSeat=2,isIncDepTime=2;
 
     @Override
@@ -149,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements Filter.ButtonShee
             @Override
             public void onClick(View view) {
                 Filter filter = Filter.newInstance(routes, true);
-                //filter.setTargetFragment(,300);
                 filter.show(getSupportFragmentManager(),"exampleBottomsheet");
 
             }
@@ -168,10 +177,7 @@ public class MainActivity extends AppCompatActivity implements Filter.ButtonShee
     public void callRecycler(List<Route> routeList){
         LinearLayoutManager llm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(llm);
-        recyclerView.setAdapter(new RecyclerAdapter(routeList));
-
-
-
+       recyclerView.setAdapter(new RecyclerAdapter(routeList));
     }
 
     public void initialLoad(){
@@ -184,5 +190,61 @@ public class MainActivity extends AppCompatActivity implements Filter.ButtonShee
         routes=route;
         callRecycler(routes);
     }
+
+    public void getDataFromFilter(boolean[] booleanFilters,boolean[] booleanOperators,String[] stringOperators){
+        filterValues=booleanFilters;
+        isOperatorChecked=booleanOperators;
+        operators=stringOperators;
+        listCheckedOperator();
+        applyFilter();
+        callRecycler(filteredRouteList);
+
+    }
+
+    public void applyFilter(){
+        filteredRouteList= new ArrayList();
+
+        Route[] route1=routes.toArray(new Route[routes.size()]);
+        for(Route route:route1){
+            if(((filterValues[0]==filterValues[1])||(filterValues[0]&&route.isIsAc())||(!route.isIsAc()&&filterValues[1]))  &&  ((filterValues[2]==filterValues[3])||(route.isIsVolvo()&&filterValues[2])||(!route.isIsVolvo()&&filterValues[3]))  &&  ((filterValues[4]==filterValues[5])||(route.isIsSleeper()&&filterValues[4])||(!route.isIsSleeper()&&filterValues[5]))){
+                if(checkedOperatorList.contains(route.getOperator())){
+                    filteredRouteList.add(route);
+                }
+            }
+        }
+       Log.e("TAG",(filterValues[0])+String.valueOf(filterValues[2])+"Items"+filteredRouteList.size());
+       for (int i=0;i<isOperatorChecked.length;i++) {
+
+            Log.e("TAG1","p "+i+(" "+isOperatorChecked[i]));
+
+
+        }
+
+        for (String string:checkedOperatorList) {
+
+            Log.e("TAG1","\n"+string);
+
+
+        }
+
+    }
+
+    public void listCheckedOperator(){
+        checkedOperatorList=new ArrayList<>();
+        int i=0;
+        for(String string:operators){
+            if(isOperatorChecked[i]){
+                checkedOperatorList.add(string);
+            }
+            i++;
+
+        }
+        if(checkedOperatorList.size()==0){
+            checkedOperatorList = Arrays.asList(operators);
+        }
+
+    }
+
+
 
 }

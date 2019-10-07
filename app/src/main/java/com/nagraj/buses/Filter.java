@@ -3,7 +3,6 @@ package com.nagraj.buses;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +21,13 @@ import java.util.List;
 import java.util.Set;
 
 public class Filter extends BottomSheetDialogFragment {
-    ButtonSheetlistener buttonSheetlistener;
-    Button doneFilter, clearFilter;
-    CheckBox ac, nonAc, volvo, nonVolvo, sleeper, semiSleeper;
+    private ButtonSheetlistener buttonSheetlistener;
+    private Button doneFilter, clearFilter;
+    private CheckBox ac, nonAc, volvo, nonVolvo, sleeper, semiSleeper;
     RecyclerView recyclerViewOperator;
     ArrayList<Route> routeArrayList = new ArrayList<>();
     public static boolean[] isOperatorChecked;
+    boolean[] filterValues=new boolean[6];
 
     Route[] routeList;
     Set<String> set = new HashSet<>();
@@ -106,6 +106,7 @@ public class Filter extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 buttonSheetlistener.onButtonClick("Button clicked");
+                setFilterValues();
                 onDismiss();
                 dismiss();
             }
@@ -143,14 +144,18 @@ public class Filter extends BottomSheetDialogFragment {
         }
     }
     public void onDismiss(){
-
-        Log.e("TAG",(ac.isChecked())+String.valueOf(volvo.isChecked()));
-        for (int i=0;i<isOperatorChecked.length;i++) {
-
-            Log.e("TAG1","p "+i+(" "+isOperatorChecked[i]));
+        MainActivity m1 = (MainActivity) getActivity();
+        m1.getDataFromFilter(filterValues,isOperatorChecked,operator);
 
 
-        }
 
+    }
+    public void setFilterValues(){
+        filterValues[0]=ac.isChecked();
+        filterValues[1]=nonAc.isChecked();
+        filterValues[2]=volvo.isChecked();
+        filterValues[3]=nonVolvo.isChecked();
+        filterValues[4]=sleeper.isChecked();
+        filterValues[5]=semiSleeper.isChecked();
     }
 }

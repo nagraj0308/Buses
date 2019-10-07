@@ -10,10 +10,14 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> {
     Route[] contactList;
-
-    public RecyclerAdapter(List<Route> route) {
+        public RecyclerAdapter(List<Route> route) {
         try {
-            contactList = route.toArray(new Route[route.size()]);
+
+            contactList =route.toArray(new Route[route.size()]);
+
+
+
+
         } catch (Exception e) {
         }
     }
@@ -44,6 +48,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> {
 
 
 
+
         } catch (Exception e) {
 
         }
@@ -68,6 +73,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> {
             this.arrivalTime = itemView.findViewById(R.id.arrivalTime);
         }
     }
+
 }
 
 
