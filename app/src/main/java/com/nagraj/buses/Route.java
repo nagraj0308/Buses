@@ -4,6 +4,8 @@ package com.nagraj.buses;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Comparator;
+
 public class Route {
 
     @SerializedName("from")
@@ -116,5 +118,13 @@ public class Route {
     public void setSeatsAvailable(int seatsAvailable) {
         this.seatsAvailable = seatsAvailable;
     }
+
+
+
+
+
+
+
+
 
 }
