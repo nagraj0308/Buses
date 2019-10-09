@@ -26,8 +26,8 @@ public class Filter extends BottomSheetDialogFragment {
     private CheckBox ac, nonAc, volvo, nonVolvo, sleeper, semiSleeper;
     RecyclerView recyclerViewOperator;
     ArrayList<Route> routeArrayList = new ArrayList<>();
-    public static boolean[] isOperatorChecked;
-    boolean[] filterValues=new boolean[6];
+    public static boolean[] isOperatorChecked,isOperatorChecked1;
+    boolean[] filterValues=new boolean[6],filterValues1;
 
     Route[] routeList;
     Set<String> set = new HashSet<>();
@@ -48,6 +48,10 @@ public class Filter extends BottomSheetDialogFragment {
         View view1 = inflater.inflate(R.layout.activity_filter, container, false);
 
         routeArrayList =(ArrayList<Route>) ((MainActivity)getActivity()).getRoutes();
+        isOperatorChecked1 =((MainActivity)getActivity()).getIsOperatorChecked();
+        filterValues1 =((MainActivity)getActivity()).getFilterValues();
+
+
         routeList = routeArrayList.toArray(new Route[routeArrayList.size()]);
         setOperators();
         operator=new String[set.size()];
@@ -65,6 +69,8 @@ public class Filter extends BottomSheetDialogFragment {
         sleeper = view1.findViewById(R.id.sleeper);
         semiSleeper = view1.findViewById(R.id.semiSleeper);
         recyclerViewOperator = view1.findViewById(R.id.recyclerViewOperator);
+
+        setFilters();
 
 
         doneFilterSection();
@@ -157,5 +163,16 @@ public class Filter extends BottomSheetDialogFragment {
         filterValues[3]=nonVolvo.isChecked();
         filterValues[4]=sleeper.isChecked();
         filterValues[5]=semiSleeper.isChecked();
+    }
+
+    public void setFilters(){
+        if(filterValues1!=null) {
+            ac.setChecked(filterValues1[0]);
+            nonAc.setChecked(filterValues1[1]);
+            volvo.setChecked(filterValues1[2]);
+            nonVolvo.setChecked(filterValues1[3]);
+            sleeper.setChecked(filterValues1[4]);
+            semiSleeper.setChecked(filterValues1[5]);
+        }
     }
 }

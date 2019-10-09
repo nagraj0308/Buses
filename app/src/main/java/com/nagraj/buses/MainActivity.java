@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements Filter.ButtonShee
 
 
     boolean[] isOperatorChecked;
-    boolean[] filterValues = {true, true, true, true, true, true};
+    boolean[] filterValues;
     String[] operators;
     int isIncFare = 2, isIncSeat = 2, isIncDepTime = 2;
 
@@ -181,6 +181,13 @@ public class MainActivity extends AppCompatActivity implements Filter.ButtonShee
 
     public List<Route> getRoutes() {
         return routes;
+    }
+
+    public boolean[] getFilterValues() {
+        return filterValues;
+    }
+    public boolean[]getIsOperatorChecked(){
+        return isOperatorChecked;
     }
 
     @Override
