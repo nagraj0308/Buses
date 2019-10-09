@@ -95,11 +95,12 @@ public class Filter extends BottomSheetDialogFragment {
                 nonVolvo.setChecked(false);
                 sleeper.setChecked(false);
                 semiSleeper.setChecked(false);
-                recyclerViewOperator.setAdapter(new OperatorRecyclerAdapter(operator));
                 for (int i=0;i<isOperatorChecked.length;i++) {
                     isOperatorChecked[i]=false;
 
                 }
+                recyclerViewOperator.setAdapter(new OperatorRecyclerAdapter(operator,isOperatorChecked));
+
             }
         });
 
@@ -138,7 +139,7 @@ public class Filter extends BottomSheetDialogFragment {
         try {
             LinearLayoutManager llm = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
             recyclerViewOperator.setLayoutManager(llm);
-            recyclerViewOperator.setAdapter(new OperatorRecyclerAdapter(operator));
+            recyclerViewOperator.setAdapter(new OperatorRecyclerAdapter(operator,isOperatorChecked1));
         } catch (Exception e) {
 
         }

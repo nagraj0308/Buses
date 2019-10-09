@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class OperatorRecyclerAdapter extends RecyclerView.Adapter<OperatorRecyclerAdapter.VH>  {
     String[] operator;
+    boolean[] checkedOperators;
 
 
-    public OperatorRecyclerAdapter(String[] operators) {
+    public OperatorRecyclerAdapter(String[] operators,boolean[] checkedOperator) {
 
         try {
             operator=operators;
+            checkedOperators=checkedOperator;
 
         } catch (Exception e) {
         }
@@ -35,6 +37,8 @@ public class OperatorRecyclerAdapter extends RecyclerView.Adapter<OperatorRecycl
     public void onBindViewHolder(final VH holder, final int position) {
         try {
             holder.operatorName.setText(operator[position]);
+            if(checkedOperators!=null)
+            holder.operatorName.setChecked(checkedOperators[position]);
 
 
 
