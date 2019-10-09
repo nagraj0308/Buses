@@ -24,8 +24,8 @@ public class Filter extends BottomSheetDialogFragment {
     private ButtonSheetlistener buttonSheetlistener;
     private Button doneFilter, clearFilter;
     private CheckBox ac, nonAc, volvo, nonVolvo, sleeper, semiSleeper;
-    RecyclerView recyclerViewOperator;
-    ArrayList<Route> routeArrayList = new ArrayList<>();
+    private RecyclerView recyclerViewOperator;
+    private ArrayList<Route> routeArrayList = new ArrayList<>();
     public static boolean[] isOperatorChecked,isOperatorChecked1;
     boolean[] filterValues=new boolean[6],filterValues1;
 
