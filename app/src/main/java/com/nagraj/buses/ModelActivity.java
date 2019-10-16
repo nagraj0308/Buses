@@ -35,7 +35,6 @@ public class ModelActivity implements InterfaceClass.ForModel {
                     Log.e("hi", "Error");
                 }
 
-
             }
 
             @Override
