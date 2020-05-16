@@ -236,20 +236,6 @@ public class MainActivity extends AppCompatActivity implements Filter.ButtonShee
                 }
             }
         }
-        Log.e("TAG", (filterValues[0]) + String.valueOf(filterValues[2]) + "Items" + filteredRouteList.size());
-        for (int i = 0; i < isOperatorChecked.length; i++) {
-
-            Log.e("TAG1", "p " + i + (" " + isOperatorChecked[i]));
-
-
-        }
-
-        for (String string : checkedOperatorList) {
-
-            Log.e("TAG1", "\n" + string);
-
-
-        }
 
     }
 
